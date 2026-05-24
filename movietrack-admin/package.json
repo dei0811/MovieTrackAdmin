@@ -11,10 +11,11 @@
     "serve:ssr:movietrack-admin": "node dist/movietrack-admin/server/server.mjs"
   },
   "private": true,
- "engines": {
-  "node": "20.x"
-},
+  "engines": {
+    "node": "20.x"
+  },
   "dependencies": {
+    "@angular/animations": "^21.2.14",
     "@angular/cdk": "^21.2.12",
     "@angular/common": "^21.2.0",
     "@angular/compiler": "^21.2.0",
