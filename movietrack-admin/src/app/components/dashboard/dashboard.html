@@ -1,0 +1,133 @@
+<div class="page">
+  <div class="page-header">
+    <div>
+      <h1>Dashboard</h1>
+      <p>Resumen general de la plataforma</p>
+    </div>
+    <button class="btn-refresh" (click)="loadData()">↺ Actualizar</button>
+  </div>
+
+  @if (loading) {
+    <div class="loading">Cargando...</div>
+  } @else if (error) {
+    <div class="error">{{ error }}</div>
+  } @else {
+    <!-- Stat cards -->
+    <div class="stat-cards">
+      <div class="stat-card">
+        <div class="stat-icon blue">👥</div>
+        <div>
+          <div class="stat-value">{{ stats.total_usuarios }}</div>
+          <div class="stat-label">Usuarios</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon purple">🎬</div>
+        <div>
+          <div class="stat-value">{{ stats.total_contenido }}</div>
+          <div class="stat-label">Películas/Series</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon red">⭐</div>
+        <div>
+          <div class="stat-value">{{ stats.total_reviews }}</div>
+          <div class="stat-label">Reviews</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon pink">❤️</div>
+        <div>
+          <div class="stat-value">{{ stats.total_favoritos }}</div>
+          <div class="stat-label">Favoritos</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fila 1 -->
+    <div class="row">
+      <div class="card flex-2">
+        <h2>Estado del contenido</h2>
+        <div class="watch-status">
+          <div class="status-item">
+            <span class="status-count green">{{ stats.contenido_visto }}</span>
+            <span class="status-label">Vistos</span>
+          </div>
+          <div class="status-item">
+            <span class="status-count orange">{{ stats.contenido_pendiente }}</span>
+            <span class="status-label">Pendientes</span>
+          </div>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" [style.width.%]="getWatchRatio() * 100"></div>
+        </div>
+        <div class="progress-labels">
+          <span>Vistos {{ (getWatchRatio() * 100).toFixed(1) }}%</span>
+          <span>Pendientes {{ ((1 - getWatchRatio()) * 100).toFixed(1) }}%</span>
+        </div>
+      </div>
+
+      <div class="card flex-3">
+        <h2>Reviews recientes</h2>
+        @for (r of recentReviews; track r.id_review) {
+          <div class="review-item">
+            <div class="score-badge" [style.background]="getScoreColor(r.score) + '22'" [style.color]="getScoreColor(r.score)">
+              {{ r.score }}
+            </div>
+            <div class="review-info">
+              <div class="review-title">{{ r.content?.title }}</div>
+              <div class="review-meta">por {{ r.user?.name }} · {{ r.date }}</div>
+              <div class="review-comment">{{ r.comment }}</div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Fila 2 -->
+    <div class="row">
+      <div class="card flex-3">
+        <h2>Distribución de scores</h2>
+        <canvas #scoresChart></canvas>
+      </div>
+      <div class="card flex-2">
+        <h2>Películas vs Series</h2>
+        <canvas #tipoChart></canvas>
+      </div>
+    </div>
+
+    <!-- Fila 3 -->
+    <div class="card">
+      <h2>Registros por mes</h2>
+      <canvas #mesesChart></canvas>
+    </div>
+
+    <!-- Fila 4 -->
+    <div class="row">
+      <div class="card flex-1">
+        <h2>Top favoritos</h2>
+        @for (item of topFavoritos.slice(0, 5); track item.title) {
+          <div class="bar-row">
+            <span class="bar-label">{{ item.title }}</span>
+            <div class="bar-track">
+              <div class="bar-fill red" [style.width.%]="(item.total_favoritos / getMaxFavoritos()) * 100"></div>
+            </div>
+            <span class="bar-value">{{ item.total_favoritos }}</span>
+          </div>
+        }
+      </div>
+      <div class="card flex-1">
+        <h2>Usuarios más activos</h2>
+        @for (item of usuariosActivos.slice(0, 5); track item.name) {
+          <div class="bar-row">
+            <span class="bar-label">{{ item.name }}</span>
+            <div class="bar-track">
+              <div class="bar-fill purple" [style.width.%]="(item.total_reviews / getMaxReviews()) * 100"></div>
+            </div>
+            <span class="bar-value">{{ item.total_reviews }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>

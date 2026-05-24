@@ -1,0 +1,59 @@
+<div class="page">
+  <div class="page-header">
+    <h1>Contenido</h1>
+    <p>Películas y series registradas en la plataforma</p>
+  </div>
+
+  @if (loading) {
+    <div class="loading">Cargando...</div>
+  } @else if (error) {
+    <div class="error">{{ error }}</div>
+  } @else {
+    <div class="toolbar">
+      <div class="search-box">
+        <span class="material-icons">search</span>
+        <input
+          type="text"
+          placeholder="Buscar por título..."
+          [(ngModel)]="search"
+          (ngModelChange)="applyFilters()"
+        />
+      </div>
+
+      <div class="filters">
+        <button class="filter-btn" [class.active]="tipoFilter === ''" (click)="tipoFilter = ''; applyFilters()">
+          Todos
+        </button>
+        <button class="filter-btn" [class.active]="tipoFilter === 'movie'" (click)="tipoFilter = 'movie'; applyFilters()">
+          🎬 Películas
+        </button>
+        <button class="filter-btn" [class.active]="tipoFilter === 'tv'" (click)="tipoFilter = 'tv'; applyFilters()">
+          📺 Series
+        </button>
+      </div>
+
+      <span class="count">{{ filtered.length }} resultados</span>
+    </div>
+
+    <div class="grid">
+      @for (item of filtered; track item.id_content) {
+        <div class="card">
+          <img
+            [src]="item.poster_url ? item.poster_url : ''"
+            [alt]="item.title"
+            class="poster"
+          />
+          <div class="info">
+            <div class="title">{{ item.title }}</div>
+            <div class="meta">
+              <span class="badge" [class.movie]="item.type === 'movie'">
+                {{ item.type === 'movie' ? 'Película' : 'Serie' }}
+              </span>
+              <span class="year">{{ item.release_date?.substring(0, 4) }}</span>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>
