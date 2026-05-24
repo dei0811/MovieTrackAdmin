@@ -1,10 +1,11 @@
 {
   "name": "movietrack-admin",
   "version": "0.0.0",
+  "packageManager": "npm@10.8.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "npx ng build",
+    "build": "node ./node_modules/@angular/cli/bin/ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:movietrack-admin": "node dist/movietrack-admin/server/server.mjs"
