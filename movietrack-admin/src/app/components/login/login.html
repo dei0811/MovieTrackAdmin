@@ -1,0 +1,25 @@
+<div class="login-page">
+  <div class="login-card">
+    <div class="brand">
+      <span class="material-icons">local_movies</span>
+      <span>MOVIETRACK</span>
+    </div>
+    <p class="subtitle">Panel de administración</p>
+
+    <div class="field">
+      <label>Correo</label>
+      <input type="email" [(ngModel)]="email" placeholder="admin@email.com" />
+    </div>
+
+    <div class="field">
+      <label>Contraseña</label>
+      <input type="password" [(ngModel)]="password" placeholder="••••••••" />
+    </div>
+
+    <div class="error" *ngIf="error">{{ error }}</div>
+
+    <button class="btn-login" (click)="onLogin()" [disabled]="loading">
+      {{ loading ? 'Ingresando...' : 'Ingresar' }}
+    </button>
+  </div>
+</div>

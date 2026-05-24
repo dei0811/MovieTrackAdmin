@@ -1,0 +1,25 @@
+<aside class="sidebar">
+  <div class="brand">
+    <span class="material-icons brand-icon">local_movies</span>
+    <div>
+      <div class="brand-name">MOVIETRACK</div>
+      <div class="brand-sub">Admin Panel</div>
+    </div>
+  </div>
+
+  <nav class="nav">
+    @for (item of menuItems; track item.route) {
+      <a [routerLink]="item.route" routerLinkActive="active" class="nav-item">
+        <span class="material-icons">{{ item.icon }}</span>
+        {{ item.label }}
+      </a>
+    }
+  </nav>
+
+  <div class="sidebar-footer">
+    <button class="logout-btn" (click)="logout()">
+      <span class="material-icons">logout</span>
+      Cerrar sesión
+    </button>
+  </div>
+</aside>

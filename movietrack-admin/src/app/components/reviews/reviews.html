@@ -1,0 +1,65 @@
+<div class="page">
+  <div class="page-header">
+    <h1>Reviews</h1>
+    <p>Gestión de reseñas de la plataforma</p>
+  </div>
+
+  @if (loading) {
+    <div class="loading">Cargando...</div>
+  } @else if (error) {
+    <div class="error">{{ error }}</div>
+  } @else {
+    <div class="toolbar">
+      <div class="search-box">
+        <span class="material-icons">search</span>
+        <input
+          type="text"
+          placeholder="Buscar por usuario, contenido o comentario..."
+          [(ngModel)]="search"
+          (ngModelChange)="onSearch()"
+        />
+      </div>
+      <span class="count">{{ filtered.length }} reviews</span>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Usuario</th>
+            <th>Contenido</th>
+            <th>Score</th>
+            <th>Comentario</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (review of filtered; track review.id_review) {
+            <tr>
+              <td>{{ review.id_review }}</td>
+              <td>{{ review.user?.name ?? '-' }}</td>
+              <td>{{ review.content?.title ?? '-' }}</td>
+              <td>
+                <span class="score"
+                  [class.high]="review.score >= 7"
+                  [class.mid]="review.score >= 5 && review.score < 7"
+                  [class.low]="review.score < 5">
+                  {{ review.score }}
+                </span>
+              </td>
+              <td class="comment">{{ review.comment }}</td>
+              <td>{{ review.date }}</td>
+              <td>
+                <button class="btn-delete" (click)="deleteReview(review.id_review)">
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

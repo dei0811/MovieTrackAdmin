@@ -1,0 +1,139 @@
+.page { color: white; }
+
+.page-header {
+  margin-bottom: 32px;
+  h1 { font-size: 28px; font-weight: 700; }
+  p  { color: #9e9e9e; margin-top: 4px; }
+}
+
+.loading, .error {
+  color: #9e9e9e;
+  text-align: center;
+  padding: 48px;
+}
+
+.error { color: #ef9a9a; }
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #1F1F1F;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 10px 14px;
+  flex: 1;
+  max-width: 350px;
+
+  .material-icons { color: #9e9e9e; font-size: 20px; }
+
+  input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 14px;
+    width: 100%;
+    &::placeholder { color: #9e9e9e; }
+  }
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+}
+
+.filter-btn {
+  padding: 8px 16px;
+  background: #1F1F1F;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  color: #9e9e9e;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s;
+
+  &:hover { background: #2A2A2A; }
+
+  &.active {
+    background: rgba(229,9,20,0.15);
+    border-color: rgba(229,9,20,0.4);
+    color: #E50914;
+  }
+}
+
+.count {
+  color: #9e9e9e;
+  font-size: 13px;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: #1F1F1F;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.15s;
+
+  &:hover { transform: translateY(-4px); }
+}
+
+.poster {
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  background: #2A2A2A;
+  min-height: 200px;
+}
+
+.info {
+  padding: 12px;
+}
+
+.title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badge {
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(74,144,217,0.15);
+  color: #4A90D9;
+
+  &.movie {
+    background: rgba(229,9,20,0.15);
+    color: #E50914;
+  }
+}
+
+.year {
+  color: #9e9e9e;
+  font-size: 12px;
+}
