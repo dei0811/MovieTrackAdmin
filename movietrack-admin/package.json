@@ -10,7 +10,7 @@
     "serve:ssr:movietrack-admin": "node dist/movietrack-admin/server/server.mjs"
   },
   "private": true,
-  "packageManager": "npm@11.12.1",
+ 
   "dependencies": {
     "@angular/cdk": "^21.2.12",
     "@angular/common": "^21.2.0",
